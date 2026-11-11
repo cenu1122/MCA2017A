@@ -1,126 +1,160 @@
+
 <!DOCTYPE html>
 <html lang="sr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MCA2017 - Metalne Obrade</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Mašinski centar Arsenijević iz Čačka. CNC struganje, CNC glodanje i mašinska obrada metala. Upiti za male i srednje serije.">
+<meta name="keywords" content="CNC obrada, CNC struganje, CNC glodanje, mašinska obrada metala, Čačak, Srbija">
+<meta name="author" content="Tomo Arsenijević PR">
+<title>MC Arsenijević | CNC obrada metala</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;
-        }
-
-        header {
-            background: #333;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-
-        nav {
-            display: flex;
-            justify-content: center;
-            background: #444;
-            flex-wrap: wrap;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav button {
-            margin: 10px;
-            padding: 10px 20px;
-            cursor: pointer;
-            border: none;
-            background: #666;
-            color: #fff;
-            border-radius: 4px;
-        }
-
-        nav button:hover {
-            background: #888;
-        }
-
-        section {
-            padding: 50px 20px;
-            text-align: center;
-            min-height: 400px;
-        }
-
-        section img {
-            max-width: 80%;
-            height: auto;
-            margin-top: 20px;
-            border-radius: 8px;
-        }
-
-        .lang-container {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            z-index: 200;
-        }
-
-        .lang-btn {
-            margin-left: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-            background: #555;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-        }
-
-        .lang-btn:hover {
-            background: #777;
-        }
-
-        .back-btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: #666;
-            color: #fff;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .back-btn:hover {
-            background: #888;
-        }
-
-        /* ===== GALERIJA ===== */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-            padding: 0 20px;
-        }
-
-        .gallery img {
-            width: 100%;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .gallery img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-    </style>
+<style>
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #252525;
+    line-height: 1.6;
+}
+header {
+    background: linear-gradient(120deg,#17212b,#34495e);
+    color: white;
+    text-align: center;
+    padding: 65px 20px;
+}
+header h1 { font-size: 38px; margin: 0; }
+header p { font-size: 18px; color: #dce5ed; }
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: #202b36;
+}
+nav button {
+    border: 0;
+    padding: 15px 18px;
+    color: white;
+    background: transparent;
+    cursor: pointer;
+    font-size: 15px;
+}
+nav button:hover { background: #40566b; }
+.lang-container {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 200;
+}
+.lang-btn {
+    background: #e0a52b;
+    color: #17212b;
+    border: 0;
+    padding: 8px 11px;
+    margin-left: 3px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+section {
+    padding: 65px 20px;
+    text-align: center;
+    scroll-margin-top: 65px;
+}
+section:nth-of-type(even) { background: #f2f4f6; }
+.container { max-width: 1100px; margin: auto; }
+h2 { font-size: 30px; color: #263747; }
+.hero-img {
+    width: 100%;
+    max-width: 750px;
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+.service {
+    background: white;
+    padding: 25px;
+    border-radius: 9px;
+    box-shadow: 0 3px 14px #00000012;
+}
+.service h3 { color: #b47b13; }
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 18px;
+    margin-top: 30px;
+}
+.gallery img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 9px;
+}
+.contact-box {
+    max-width: 650px;
+    margin: 25px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 3px 14px #00000012;
+}
+.contact-box input, .contact-box textarea {
+    width: 100%;
+    padding: 13px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+}
+.contact-box button, .main-btn {
+    display: inline-block;
+    background: #d99b22;
+    color: #17212b;
+    border: 0;
+    padding: 13px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+}
+.contact-box button:hover, .main-btn:hover { background: #efb944; }
+footer {
+    background: #202b36;
+    color: white;
+    padding: 35px 20px;
+    text-align: center;
+}
+footer a { color: #f0c36b; }
+.impressum {
+    max-width: 850px;
+    margin: auto;
+    text-align: left;
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+}
+.impressum p { margin: 8px 0; }
+.small-note { font-size: 13px; color: #777; }
+@media(max-width:600px) {
+    header h1 { font-size: 29px; }
+    nav button { padding: 11px 9px; font-size: 13px; }
+    section { padding: 45px 15px; }
+}
+</style>
 </head>
 
 <body>
-
-<header>
-    <h1 id="title">MCA2017 - Metalne Obrade</h1>
-</header>
 
 <div class="lang-container">
     <button class="lang-btn" onclick="setLang('sr')">SR</button>
@@ -128,153 +162,316 @@
     <button class="lang-btn" onclick="setLang('de')">DE</button>
 </div>
 
+<header>
+    <h1 id="title">MAŠINSKI CENTAR ARSENIJEVIĆ</h1>
+    <p id="subtitle">CNC struganje | CNC glodanje | Mašinska obrada metala</p>
+    <p>Čačak, Srbija</p>
+</header>
+
 <nav>
-    <button onclick="scrollToSection('pocetna')">Početna</button>
-    <button onclick="scrollToSection('onama')">O nama</button>
-    <button onclick="scrollToSection('zasto')">Zašto mi</button>
-    <button onclick="scrollToSection('galerija')">Galerija</button>
-    <button onclick="scrollToSection('recenzije')">Recenzije</button>
-    <button onclick="scrollToSection('kontakt')">Kontakt</button>
+    <button onclick="go('pocetna')" data-sr="Početna" data-en="Home" data-de="Startseite">Početna</button>
+    <button onclick="go('onama')" data-sr="O nama" data-en="About us" data-de="Über uns">O nama</button>
+    <button onclick="go('usluge')" data-sr="Usluge" data-en="Services" data-de="Leistungen">Usluge</button>
+    <button onclick="go('zasto')" data-sr="Zašto mi" data-en="Why us" data-de="Warum wir">Zašto mi</button>
+    <button onclick="go('galerija')" data-sr="Galerija" data-en="Gallery" data-de="Galerie">Galerija</button>
+    <button onclick="go('kontakt')" data-sr="Kontakt" data-en="Contact" data-de="Kontakt">Kontakt</button>
+    <button onclick="go('impressum')">Impressum</button>
 </nav>
 
 <section id="pocetna">
-    <h2 id="h-pocetna">Dobrodošli u MCA2017</h2>
-    <img src="pocetna.png" alt="Početna">
-    <p id="p-pocetna">Precizne i kvalitetne metalne usluge po vašim potrebama.</p>
+    <div class="container">
+        <h2 id="welcome">Dobrodošli u Mašinski centar Arsenijević</h2>
+        <img class="hero-img" src="pocetna.png" alt="Mašinski centar Arsenijević">
+        <p id="intro">
+            Pružamo usluge CNC struganja i glodanja prema crtežima i zahtevima kupaca.
+            Otvoreni smo za saradnju sa domaćim i evropskim kompanijama.
+        </p>
+        <a href="#kontakt" class="main-btn" id="quoteBtn">Pošaljite upit</a>
+    </div>
 </section>
 
-<!-- Sekcija: O nama -->
-<section id="o-nama" style="background-color:#f2f2f2; padding:40px; font-family:Arial, sans-serif;">
-  <div style="max-width:900px; margin:auto; display:flex; flex-wrap:wrap; align-items:center; gap:20px;">
-    
-    <!-- Slika -->
-    <div style="flex:1; min-width:250px;">
-      <img src="onama.jpg" alt="O nama" style="width:100%; border-radius:8px; object-fit:cover;">
+<section id="onama">
+    <div class="container">
+        <h2 id="aboutTitle">O nama</h2>
+        <p id="aboutText">
+            Mašinski centar Arsenijević je preduzetnička firma iz Čačka,
+            Srbija, koja se bavi mašinskom obradom metala.
+            Firma posluje od 2016. godine.
+        </p>
+        <p id="aboutText2">
+            Naše usluge obuhvataju CNC struganje i CNC glodanje.
+            Zainteresovani smo za izradu delova prema tehničkim crtežima
+            i specifikacijama kupaca, kao i za male i srednje proizvodne serije.
+        </p>
+        <img class="hero-img" src="onama.jpg" alt="Mašinska obrada">
     </div>
-    
-    <!-- Tekst -->
-    <div style="flex:2; min-width:250px;">
-      <h2 style="font-size:32px; color:#333; margin-bottom:20px;">O nama</h2>
-      <p style="font-size:18px; color:#555; line-height:1.6; margin-bottom:15px;">
-        Uz dugogodišnje iskustvo u metalnoj obradi, uvijek pružamo vrhunsku preciznost i pouzdanost. Naš tim stručnjaka predano radi kako bi vaše ideje postale stvarnost.
-      </p>
-      <p style="font-size:18px; color:#555; line-height:1.6; margin-bottom:15px;">
-        Specijalizirani smo za <strong>CNC obradu, tokarenje, glodanje i zavarivanje</strong>, koristeći moderne tehnologije i strojeve visokih performansi. Svaki projekt pratimo od ideje do finalnog proizvoda, s fokusom na kvalitetu, sigurnost i poštivanje rokova.
-      </p>
-      <p style="font-size:18px; color:#555; line-height:1.6; margin-bottom:15px;">
-        Naša misija je <strong>ispuniti očekivanja klijenata</strong> kroz inovativna rješenja i personaliziran pristup. Bez obzira radi li se o prototipu, maloserijskoj proizvodnji ili industrijskom projektu, mi osiguravamo preciznost i dugotrajnost svakog dijela.
-      </p>
-      <p style="font-size:18px; color:#555; line-height:1.6;">
-        Vjerujemo da je <strong>pouzdan partner ključ uspjeha</strong>, zato kontinuirano ulažemo u edukaciju zaposlenika, modernizaciju opreme i održavanje visokih standarda kvalitete.
-      </p>
-    </div>
-    
-  </div>
 </section>
 
-
+<section id="usluge">
+    <div class="container">
+        <h2 id="servicesTitle">Naše usluge</h2>
+        <div class="services">
+            <div class="service">
+                <h3 id="turningTitle">CNC struganje</h3>
+                <p id="turningText">
+                    Izrada mašinskih delova postupkom CNC struganja,
+                    prema crtežima i zahtevima kupca.
+                </p>
+            </div>
+            <div class="service">
+                <h3 id="millingTitle">CNC glodanje</h3>
+                <p id="millingText">
+                    Mašinska obrada delova postupkom CNC glodanja
+                    prema dostavljenoj tehničkoj dokumentaciji.
+                </p>
+            </div>
+            <div class="service">
+                <h3 id="seriesTitle">Male i srednje serije</h3>
+                <p id="seriesText">
+                    Razmatramo upite za pojedinačne komade,
+                    male i srednje proizvodne serije.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
 
 <section id="zasto">
-    <h2 id="h-zasto">Zašto mi</h2>
-    <img src="zastomi.png" alt="Zašto mi">
-    <p id="p-zasto">
-        Kvalitet, preciznost i zadovoljstvo klijenata su naši prioriteti.
-    </p>
-    <a class="back-btn" onclick="scrollToSection('pocetna')">Nazad na početnu</a>
-</section>
-
-<!-- ===== GALERIJA ===== -->
-<section id="galerija">
-    <h2 id="h-galerija">Galerija</h2>
-
-    <div class="gallery">
-        <img src="tokarenje1.png" alt="Tokarenje">
-        <img src="REZANJELASEROM.png" alt="Rezanje laserom">
-        <img src="tijarebhe.png" alt="Obrada metala">
-        <img src="usluge.png" alt="Usluge">
+    <div class="container">
+        <h2 id="whyTitle">Zašto sarađivati sa nama?</h2>
+        <p id="whyText">
+            Direktna komunikacija, mogućnost razmatranja izrade
+            prema tehničkim crtežima i saradnja na proizvodnim projektima.
+        </p>
+        <ul style="display:inline-block;text-align:left;line-height:2">
+            <li id="why1">CNC struganje i glodanje</li>
+            <li id="why2">Mogućnost izrade malih i srednjih serija</li>
+            <li id="why3">Razmatranje tehničkih crteža i zahteva</li>
+            <li id="why4">Čačak, Srbija</li>
+        </ul>
     </div>
-
-    <a class="back-btn" onclick="scrollToSection('pocetna')">Nazad na početnu</a>
 </section>
 
-<section id="recenzije">
-    <h2 id="h-recenzije">Recenzije</h2>
-    <img src="recenzije.png" alt="Recenzije">
-    <p id="p-recenzije">Naši zadovoljni klijenti govore za nas.</p>
-    <a class="back-btn" onclick="scrollToSection('pocetna')">Nazad na početnu</a>
+<section id="galerija">
+    <div class="container">
+        <h2 id="galleryTitle">Galerija</h2>
+        <div class="gallery">
+            <img src="tokarenje1.png" alt="CNC struganje">
+            <img src="tijarebhe.png" alt="Mašinska obrada">
+            <img src="usluge.png" alt="Mašinske usluge">
+            <img src="pocetna.png" alt="Mašinski centar">
+        </div>
+        <p class="small-note" id="galleryNote">
+            Fotografije prikazuju opremu i radove firme. Koristite samo
+            fotografije koje zaista pripadaju Mašinskom centru Arsenijević.
+        </p>
+    </div>
 </section>
 
 <section id="kontakt">
-    <h2 id="h-kontakt">Kontakt</h2>
-    <img src="kontakt.png" alt="Kontakt">
-    <p id="p-kontakt">
-        Kontaktirajte nas putem telefona ili emaila i dogovorite svoju uslugu.
-    </p>
-    <a class="back-btn" onclick="scrollToSection('pocetna')">Nazad na početnu</a>
+    <div class="container">
+        <h2 id="contactTitle">Kontaktirajte nas</h2>
+        <div class="contact-box">
+            <p><strong>Mašinski centar Arsenijević</strong></p>
+            <p>Čačak, Srbija</p>
+            <p>Telefon: <a href="tel:+38163629634">+381 63 629 634</a></p>
+            <p>E-mail: <a href="mailto:mcarsenijevic@gmail.com">mcarsenijevic@gmail.com</a></p>
+            <hr>
+            <h3 id="formTitle">Pošaljite poslovni upit</h3>
+            <form onsubmit="sendMail(event)">
+                <input id="name" type="text" placeholder="Ime i prezime / Company" required>
+                <input id="email" type="email" placeholder="Vaš e-mail" required>
+                <input id="subject" type="text" placeholder="Predmet upita" required>
+                <textarea id="message" rows="6" placeholder="Opišite šta vam je potrebno..." required></textarea>
+                <button type="submit" id="sendBtn">Pošalji upit</button>
+            </form>
+            <p class="small-note" id="mailNote">
+                Klikom na dugme otvara se vaš e-mail program sa pripremljenom porukom.
+            </p>
+        </div>
+    </div>
 </section>
 
+<section id="impressum">
+    <div class="container">
+        <h2>Impressum</h2>
+        <div class="impressum">
+            <p><strong>Puno poslovno ime:</strong><br>
+            TOMO ARSENIJEVIĆ PR MAŠINSKA OBRADA METALA
+            MAŠINSKI CENTAR ARSENIJEVIĆ ČAČAK</p>
+
+            <p><strong>Vlasnik:</strong> Tomo Arsenijević</p>
+            <p><strong>PIB:</strong> 109322193</p>
+            <p><strong>Matični broj:</strong> 64092405</p>
+            <p><strong>Pretežna delatnost:</strong> 2562 – Mašinska obrada metala</p>
+            <p><strong>Datum osnivanja:</strong> 04.01.2016.</p>
+            <p><strong>Sedište:</strong> Čačak, Republika Srbija</p>
+            <p><strong>Telefon:</strong> <a href="tel:+38163629634">+381 63 629 634</a></p>
+            <p><strong>E-mail:</strong>
+            <a href="mailto:mcarsenijevic@gmail.com">mcarsenijevic@gmail.com</a></p>
+
+            <p class="small-note">
+                Napomena: Tačnu registrovanu adresu sedišta potrebno je
+                potvrditi prema aktuelnom izvodu iz APR-a pre objavljivanja.
+                Podaci su informativno preuzeti iz javno dostupnog poslovnog imenika.
+            </p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© <span id="year"></span> Mašinski centar Arsenijević – Čačak, Srbija</p>
+    <p>CNC struganje | CNC glodanje | Mašinska obrada metala</p>
+    <p><a href="mailto:mcarsenijevic@gmail.com">mcarsenijevic@gmail.com</a> |
+    <a href="tel:+38163629634">+381 63 629 634</a></p>
+</footer>
+
 <script>
-    function scrollToSection(id) {
+document.getElementById("year").textContent = new Date().getFullYear();
+
+function go(id) {
+    document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+
+function sendMail(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const subject = document.getElementById("subject").value;
+    const message = document.getElementById("message").value;
+
+    const body =
+        "Ime / Company: " + name + "\n" +
+        "Email: " + email + "\n\n" +
+        "Poruka:\n" + message;
+
+    const url = "mailto:mcarsenijevic@gmail.com" +
+        "?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body);
+
+    window.location.href = url;
+}
+
+const translations = {
+sr: {
+title:"MAŠINSKI CENTAR ARSENIJEVIĆ",
+subtitle:"CNC struganje | CNC glodanje | Mašinska obrada metala",
+welcome:"Dobrodošli u Mašinski centar Arsenijević",
+intro:"Pružamo usluge CNC struganja i glodanja prema crtežima i zahtevima kupaca. Otvoreni smo za saradnju sa domaćim i evropskim kompanijama.",
+quoteBtn:"Pošaljite upit",
+aboutTitle:"O nama",
+aboutText:"Mašinski centar Arsenijević je preduzetnička firma iz Čačka, Srbija, koja se bavi mašinskom obradom metala. Firma posluje od 2016. godine.",
+aboutText2:"Naše usluge obuhvataju CNC struganje i CNC glodanje. Zainteresovani smo za izradu delova prema tehničkim crtežima i specifikacijama kupaca, kao i za male i srednje proizvodne serije.",
+servicesTitle:"Naše usluge",
+turningTitle:"CNC struganje",
+turningText:"Izrada mašinskih delova postupkom CNC struganja, prema crtežima i zahtevima kupca.",
+millingTitle:"CNC glodanje",
+millingText:"Mašinska obrada delova postupkom CNC glodanja prema dostavljenoj tehničkoj dokumentaciji.",
+seriesTitle:"Male i srednje serije",
+seriesText:"Razmatramo upite za pojedinačne komade, male i srednje proizvodne serije.",
+whyTitle:"Zašto sarađivati sa nama?",
+whyText:"Direktna komunikacija, mogućnost razmatranja izrade prema tehničkim crtežima i saradnja na proizvodnim projektima.",
+why1:"CNC struganje i glodanje",
+why2:"Mogućnost izrade malih i srednjih serija",
+why3:"Razmatranje tehničkih crteža i zahteva",
+why4:"Čačak, Srbija",
+galleryTitle:"Galerija",
+galleryNote:"Fotografije prikazuju opremu i radove firme. Koristite samo fotografije koje zaista pripadaju Mašinskom centru Arsenijević.",
+contactTitle:"Kontaktirajte nas",
+formTitle:"Pošaljite poslovni upit",
+sendBtn:"Pošalji upit",
+mailNote:"Klikom na dugme otvara se vaš e-mail program sa pripremljenom porukom."
+},
+en: {
+title:"ARSENIJEVIC MACHINING CENTER",
+subtitle:"CNC Turning | CNC Milling | Metal Machining",
+welcome:"Welcome to Arsenijevic Machining Center",
+intro:"We offer CNC turning and milling services according to customer drawings and requirements. We welcome cooperation with companies in Serbia and across Europe.",
+quoteBtn:"Send an enquiry",
+aboutTitle:"About Us",
+aboutText:"Arsenijevic Machining Center is a machining business based in Cacak, Serbia. The company has been operating since 2016.",
+aboutText2:"Our services include CNC turning and CNC milling. We are interested in manufacturing parts according to customer technical drawings and specifications, including small and medium production batches.",
+servicesTitle:"Our Services",
+turningTitle:"CNC Turning",
+turningText:"Manufacturing machined components using CNC turning according to customer drawings and requirements.",
+millingTitle:"CNC Milling",
+millingText:"Machining components using CNC milling according to supplied technical documentation.",
+seriesTitle:"Small and Medium Batches",
+seriesText:"We welcome enquiries for individual parts and small or medium production batches.",
+whyTitle:"Why Work With Us?",
+whyText:"Direct communication, review of technical drawings and cooperation on manufacturing projects.",
+why1:"CNC turning and milling",
+why2:"Small and medium production batches",
+why3:"Review of technical drawings and requirements",
+why4:"Cacak, Serbia",
+galleryTitle:"Gallery",
+galleryNote:"Images should show actual equipment and work of the company. Use only photographs belonging to Arsenijevic Machining Center.",
+contactTitle:"Contact Us",
+formTitle:"Send a Business Enquiry",
+sendBtn:"Send Enquiry",
+mailNote:"Clicking the button opens your email application with a prepared message."
+},
+de: {
+title:"ARSENIJEVIC MASCHINENZENTRUM",
+subtitle:"CNC-Drehen | CNC-Fräsen | Metallbearbeitung",
+welcome:"Willkommen beim Maschinenzentrum Arsenijevic",
+intro:"Wir bieten CNC-Dreh- und Fräsdienstleistungen nach Kundenzeichnungen und Anforderungen an. Wir freuen uns auf die Zusammenarbeit mit Unternehmen in Serbien und Europa.",
+quoteBtn:"Anfrage senden",
+aboutTitle:"Über uns",
+aboutText:"Das Maschinenzentrum Arsenijevic ist ein Unternehmen für Metallbearbeitung mit Sitz in Cacak, Serbien. Das Unternehmen ist seit 2016 tätig.",
+aboutText2:"Unsere Dienstleistungen umfassen CNC-Drehen und CNC-Fräsen. Wir interessieren uns für die Fertigung von Teilen nach technischen Zeichnungen und Spezifikationen unserer Kunden, auch in kleinen und mittleren Serien.",
+servicesTitle:"Unsere Leistungen",
+turningTitle:"CNC-Drehen",
+turningText:"Fertigung von Maschinenteilen durch CNC-Drehen nach Kundenzeichnungen und Anforderungen.",
+millingTitle:"CNC-Fräsen",
+millingText:"Bearbeitung von Bauteilen durch CNC-Fräsen nach bereitgestellten technischen Unterlagen.",
+seriesTitle:"Kleine und mittlere Serien",
+seriesText:"Wir freuen uns über Anfragen für Einzelteile sowie kleine und mittlere Serien.",
+whyTitle:"Warum mit uns arbeiten?",
+whyText:"Direkte Kommunikation, Prüfung technischer Zeichnungen und Zusammenarbeit bei Fertigungsprojekten.",
+why1:"CNC-Drehen und CNC-Fräsen",
+why2:"Kleine und mittlere Produktionsserien",
+why3:"Prüfung technischer Zeichnungen und Anforderungen",
+why4:"Cacak, Serbien",
+galleryTitle:"Galerie",
+galleryNote:"Die Bilder sollen die tatsächliche Ausstattung und Arbeit des Unternehmens zeigen. Verwenden Sie nur eigene Firmenfotos.",
+contactTitle:"Kontaktieren Sie uns",
+formTitle:"Geschäftsanfrage senden",
+sendBtn:"Anfrage senden",
+mailNote:"Beim Anklicken öffnet sich Ihr E-Mail-Programm mit einer vorbereiteten Nachricht."
+}
+};
+
+function setLang(lang) {
+    document.documentElement.lang = lang;
+    for (const id in translations[lang]) {
         const el = document.getElementById(id);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
+        if (el) el.textContent = translations[lang][id];
     }
 
-    const texts = {
-        sr: {
-            title: "MCA2017 - Metalne Obrade",
-            "h-pocetna": "Dobrodošli u MCA2017",
-            "p-pocetna": "Precizne i kvalitetne metalne usluge po vašim potrebama.",
-            "h-onama": "O nama",
-            "p-onama": "MCA2017 je firma specijalizovana za tokarenje, glodanje, rezanje laserom i brušenje metala.",
-            "h-zasto": "Zašto mi",
-            "p-zasto": "Kvalitet, preciznost i zadovoljstvo klijenata su naši prioriteti.",
-            "h-galerija": "Galerija",
-            "h-recenzije": "Recenzije",
-            "p-recenzije": "Naši zadovoljni klijenti govore za nas.",
-            "h-kontakt": "Kontakt",
-            "p-kontakt": "Kontaktirajte nas putem telefona ili emaila i dogovorite svoju uslugu."
-        },
-        en: {
-            title: "MCA2017 - Metal Works",
-            "h-pocetna": "Welcome to MCA2017",
-            "p-pocetna": "Precise and quality metal services tailored to your needs.",
-            "h-onama": "About Us",
-            "p-onama": "MCA2017 specializes in turning, milling, laser cutting and metal grinding.",
-            "h-zasto": "Why Us",
-            "p-zasto": "Quality, precision and customer satisfaction are our priorities.",
-            "h-galerija": "Gallery",
-            "h-recenzije": "Reviews",
-            "p-recenzije": "Our satisfied clients speak for us.",
-            "h-kontakt": "Contact",
-            "p-kontakt": "Contact us by phone or email to arrange your service."
-        },
-        de: {
-            title: "MCA2017 - Metallarbeiten",
-            "h-pocetna": "Willkommen bei MCA2017",
-            "p-pocetna": "Präzise und hochwertige Metallarbeiten nach Ihren Bedürfnissen.",
-            "h-onama": "Über uns",
-            "p-onama": "MCA2017 ist spezialisiert auf Drehen, Fräsen, Laserschneiden und Schleifen von Metallen.",
-            "h-zasto": "Warum wir",
-            "p-zasto": "Qualität, Präzision und Kundenzufriedenheit sind unsere Priorität.",
-            "h-galerija": "Galerie",
-            "h-recenzije": "Bewertungen",
-            "p-recenzije": "Unsere zufriedenen Kunden sprechen für uns.",
-            "h-kontakt": "Kontakt",
-            "p-kontakt": "Kontaktieren Sie uns telefonisch oder per E-Mail."
-        }
-    };
+    document.querySelectorAll("nav button[data-" + lang + "]").forEach(btn => {
+        btn.textContent = btn.getAttribute("data-" + lang);
+    });
 
-    function setLang(lang) {
-        for (const id in texts[lang]) {
-            const el = document.getElementById(id);
-            if (el) el.innerText = texts[lang][id];
-        }
-    }
+    document.getElementById("name").placeholder =
+        lang === "de" ? "Name / Unternehmen" :
+        lang === "en" ? "Name / Company" : "Ime i prezime / Firma";
+
+    document.getElementById("email").placeholder =
+        lang === "de" ? "Ihre E-Mail-Adresse" :
+        lang === "en" ? "Your email address" : "Vaš e-mail";
+
+    document.getElementById("subject").placeholder =
+        lang === "de" ? "Betreff" :
+        lang === "en" ? "Subject" : "Predmet upita";
+
+    document.getElementById("message").placeholder =
+        lang === "de" ? "Beschreiben Sie Ihre Anfrage..." :
+        lang === "en" ? "Describe your enquiry..." :
+        "Opišite šta vam je potrebno...";
+}
 </script>
 
 </body>
 </html>
-
-
-
-

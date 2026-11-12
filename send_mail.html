@@ -49,15 +49,20 @@ label {
     font-weight: bold;
 }
 
-input, textarea {
+input, textarea, select {
     width: 100%;
     padding: 13px;
     border: 1px solid #cbd5e1;
     border-radius: 7px;
     font-size: 15px;
+    background: white;
 }
 
-input:focus, textarea:focus {
+select {
+    max-width: 350px;
+}
+
+input:focus, textarea:focus, select:focus {
     outline: 2px solid #93c5fd;
     border-color: #2563eb;
 }
@@ -304,8 +309,6 @@ Odjava
 </button>
 </div>
 
-<!-- SLANJE EMAILA -->
-
 <form id="offerForm">
 
 <label for="primalac">Email adresa primaoca</label>
@@ -338,72 +341,66 @@ Pošalji email
 
 <div id="status" class="message"></div>
 
-<!-- HISTORIJA EMAILOVA -->
-
 <div class="history">
 
-<div class="history-toolbar">
-<h2>Historija poslanih emailova</h2>
+    <div class="history-toolbar">
+        <h2>Historija email komunikacije</h2>
 
-<button type="button" class="secondary" id="refreshHistory">
-Osvježi historiju
-</button>
-</div>
+        <button type="button" class="secondary" id="refreshHistory">
+            Osvježi historiju
+        </button>
+    </div>
 
-<div class="note">
-Prikazuju se samo zapisi iz tabele "MAILOVI_RESEND"
-kod kojih EMAIL_PRIMAOCA ili EMAIL_POSILJAOCA
-sadrži adresu:
+    <label for="historyFilter">Filtriraj email komunikaciju:</label>
 
-<strong>mca2017@docbizhub.com</strong>
+    <select id="historyFilter">
+        <option value="mca2017@docbizhub.com">
+            mca2017@docbizhub.com
+        </option>
+        <option value="bosnaniless@docbizhub.com">
+            bosnaniless@docbizhub.com
+        </option>
+        <option value="ALL">
+            Sve poruke iz MAILOVI_RESEND
+        </option>
+    </select>
 
-Prijavljeni korisnik ne utiče na filtriranje.
-</div>
+    <div class="history-count" id="historyCount">
+        Učitavanje...
+    </div>
 
-<div class="history-count" id="historyCount">
-Učitavanje...
-</div>
+    <div id="historyStatus" class="message"></div>
 
-<div id="historyStatus" class="message"></div>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Primalac</th>
+                    <th>Pošiljalac</th>
+                    <th>Naslov</th>
+                    <th>Sadržaj</th>
+                    <th>Tip</th>
+                    <th>Status</th>
+                    <th>Model</th>
+                    <th>Datum</th>
+                    <th>Detalji</th>
+                    <th>Odgovor na ID</th>
+                </tr>
+            </thead>
 
-<div class="table-wrapper">
-
-<table>
-<thead>
-<tr>
-<th>ID</th>
-<th>Primalac</th>
-<th>Pošiljalac</th>
-<th>Naslov</th>
-<th>Sadržaj</th>
-<th>Tip</th>
-<th>Status</th>
-<th>Model</th>
-<th>Datum</th>
-<th>Detalji</th>
-<th>Odgovor na ID</th>
-</tr>
-</thead>
-
-<tbody id="historyBody">
-<tr>
-<td colspan="11" class="empty">
-Učitavanje emailova...
-</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-
-<div class="note">
-Emailovi se šalju putem postojeće Supabase Edge Function.
-Historija se čita direktno iz tabele "MAILOVI_RESEND".
+            <tbody id="historyBody">
+                <tr>
+                    <td colspan="11" class="empty">
+                        Učitavanje emailova...
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 </section>
-
 </div>
 
 <script>
@@ -431,10 +428,6 @@ const FUNCTION_NAME =
 
 const SENDER_NAME = "mca2017";
 const SENDER_EMAIL = "mca2017@docbizhub.com";
-
-/* ADRESA ZA FILTRIRANJE HISTORIJE */
-
-const HISTORY_FILTER_EMAIL = "mca2017@docbizhub.com";
 
 /* TABELA */
 
@@ -693,7 +686,7 @@ $("resetButton").addEventListener("click", async function() {
     }
 });
 
-/* PREGLED */
+/* PREGLED EMAILA */
 
 $("previewButton").addEventListener("click", function() {
 
@@ -715,60 +708,82 @@ $("previewButton").addEventListener("click", function() {
     );
 });
 
-/* UČITAVANJE HISTORIJE */
+/* UČITAVANJE HISTORIJE EMAILOVA */
 
 async function loadHistory() {
 
     clearMessage(historyStatus);
 
     historyBody.innerHTML = "";
-
     historyCount.textContent = "Učitavanje emailova...";
-
-    const columns = [
-        "ID",
-        "RESEND_ID",
-        "EMAIL_PRIMAOCA",
-        "NASLOV",
-        "SADRZAJ",
-        "MODEL_KORISTEN",
-        "TIP",
-        "STATUS",
-        "DETALJI",
-        "CREATED_AT",
-        "EMAIL_POSILJAOCA",
-        "ODGOVOR_NA_ID"
-    ];
 
     try {
 
-        const filter =
-            `EMAIL_PRIMAOCA.ilike.%${HISTORY_FILTER_EMAIL}%,` +
-            `EMAIL_POSILJAOCA.ilike.%${HISTORY_FILTER_EMAIL}%`;
+        const selectedFilter = $("historyFilter").value;
+
+        /*
+         * Učitavamo sve kolone.
+         * Tako izbegavamo grešku zbog nepostojeće kolone
+         * u ručno navedenom spisku kolona.
+         */
 
         const { data, error } = await DOCBIZ_SUPABASE
             .from(HISTORY_TABLE)
-            .select(columns.join(","))
-            .or(filter)
-            .order("CREATED_AT", { ascending: false })
+            .select("*")
             .limit(500);
 
         if (error) throw error;
 
+        let filteredData = data || [];
+
+        /*
+         * FILTER PO ADRESI:
+         * Pretražuje primaoca I pošiljaoca.
+         */
+
+        if (selectedFilter !== "ALL") {
+
+            const email = selectedFilter.toLowerCase();
+
+            filteredData = filteredData.filter(mail => {
+
+                const primalac =
+                    String(mail.EMAIL_PRIMAOCA || "").toLowerCase();
+
+                const posiljalac =
+                    String(mail.EMAIL_POSILJAOCA || "").toLowerCase();
+
+                return primalac === email || posiljalac === email;
+            });
+        }
+
+        /*
+         * SORTIRANJE PO DATUMU
+         */
+
+        filteredData.sort((a, b) => {
+
+            const dateA = new Date(a.CREATED_AT || 0).getTime();
+            const dateB = new Date(b.CREATED_AT || 0).getTime();
+
+            return dateB - dateA;
+        });
+
         historyBody.innerHTML = "";
 
-        if (!data || data.length === 0) {
+        if (filteredData.length === 0) {
 
             historyBody.innerHTML =
                 '<tr><td colspan="11" class="empty">' +
-                'Nema emailova za zadatu adresu.' +
+                'Nema pronađenih emailova.' +
                 '</td></tr>';
 
             historyCount.textContent = "Pronađeno: 0 emailova";
+
             return;
         }
 
-        data.forEach(mail => {
+        filteredData.forEach(mail => {
 
             const row = document.createElement("tr");
 
@@ -797,8 +812,8 @@ async function loadHistory() {
         });
 
         historyCount.textContent =
-            "Pronađeno: " + data.length +
-            " emailova (maksimalno 500 prikazanih).";
+            "Pronađeno: " + filteredData.length +
+            " emailova (maksimalno 500 učitanih).";
 
     } catch (error) {
 
@@ -813,15 +828,18 @@ async function loadHistory() {
 
         showError(
             historyStatus,
-            "Greška: " + error.message +
-            "\nProvjerite nazive kolona i Supabase SELECT RLS dozvole."
+            "Greška pri učitavanju: " + error.message +
+            "\nProvjerite da li tabela MAILOVI_RESEND postoji " +
+            "i da li korisnik ima odgovarajuće RLS dozvole."
         );
     }
 }
 
-/* RUČNO OSVJEŽAVANJE */
+/* RUČNO OSVJEŽAVANJE I FILTER */
 
 $("refreshHistory").addEventListener("click", loadHistory);
+
+$("historyFilter").addEventListener("change", loadHistory);
 
 /* SLANJE EMAILA */
 

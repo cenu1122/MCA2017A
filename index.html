@@ -115,10 +115,28 @@
     }
 
     .languages button.active,
-    .languages button:hover {
-      background: var(--blue);
-      border-color: var(--blue);
-    }
+.languages button:hover {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
+/* SEND MAIL dugme */
+.send-mail-btn {
+  display: inline-block;
+  background: var(--blue);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: bold;
+  transition: background .2s, transform .2s;
+  white-space: nowrap;
+}
+
+.send-mail-btn:hover {
+  background: var(--blue-light);
+  transform: translateY(-2px);
+}
 
     .hero {
       min-height: 590px;
@@ -548,6 +566,7 @@
       <button type="button" onclick="setLang('en')">EN</button>
       <button type="button" onclick="setLang('de')">DE</button>
     </div>
+    <a href="send_mail.html" class="send-mail-btn">SEND MAIL</a>
   </div>
 </header>
 

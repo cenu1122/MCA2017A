@@ -20,7 +20,8 @@ body {
 }
 
 .container {
-    max-width: 1100px;
+    max-width: 1500px;
+    width: 100%;
     margin: 35px auto;
     background: white;
     padding: 30px;
@@ -140,15 +141,6 @@ button:disabled {
     margin-bottom: 25px;
 }
 
-.note {
-    background: #eff6ff;
-    padding: 14px;
-    border-radius: 7px;
-    color: #1e40af;
-    line-height: 1.5;
-    margin-top: 20px;
-}
-
 .diagnostic {
     background: #f8fafc;
     border: 1px solid #cbd5e1;
@@ -201,7 +193,8 @@ button:disabled {
 table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 850px;
+    min-width: 1500px;
+    table-layout: fixed;
 }
 
 th, td {
@@ -218,15 +211,73 @@ th {
     color: white;
 }
 
+/* ŠIRINE KOLONA */
+
+th:nth-child(1), td:nth-child(1) { width: 65px; }
+th:nth-child(2), td:nth-child(2) { width: 180px; }
+th:nth-child(3), td:nth-child(3) { width: 180px; }
+th:nth-child(4), td:nth-child(4) { width: 190px; }
+
+/* Sadržaj emaila – široka kolona */
+th:nth-child(5), td:nth-child(5) { width: 450px; }
+
+th:nth-child(6), td:nth-child(6) { width: 100px; }
+th:nth-child(7), td:nth-child(7) { width: 110px; }
+th:nth-child(8), td:nth-child(8) { width: 130px; }
+th:nth-child(9), td:nth-child(9) { width: 155px; }
+
+/* Detalji */
+th:nth-child(10), td:nth-child(10) { width: 300px; }
+
+th:nth-child(11), td:nth-child(11) { width: 130px; }
+
 tr:hover td {
     background: #f8fafc;
 }
 
-.email-content {
-    white-space: pre-wrap;
+/* PROŠIRIVI TEKST */
+
+.expandable-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    overflow: hidden;
     overflow-wrap: anywhere;
-    max-width: 300px;
+    white-space: pre-wrap;
+
+    line-height: 1.5;
+    max-height: 3em;
+
+    cursor: pointer;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px;
+
+    transition: background .2s ease;
 }
+
+.expandable-text:hover {
+    background: #e0edff;
+    border-color: #93c5fd;
+}
+
+/* KADA SE KLIKNE – PRIKAZUJE SE CEO TEKST */
+
+.expandable-text.expanded {
+    display: block;
+    -webkit-line-clamp: unset;
+    max-height: none;
+    overflow: visible;
+    white-space: pre-wrap;
+    background: #eff6ff;
+    border: 1px solid #93c5fd;
+    padding: 12px;
+    min-height: 60px;
+}
+
+/* STATUS */
 
 .status-label {
     display: inline-block;
@@ -245,6 +296,7 @@ tr:hover td {
 
 @media(max-width:600px) {
     body { padding: 12px; }
+
     .container {
         margin: 10px auto;
         padding: 18px;
@@ -309,6 +361,8 @@ Odjava
 </button>
 </div>
 
+<!-- SLANJE EMAILA -->
+
 <form id="offerForm">
 
 <label for="primalac">Email adresa primaoca</label>
@@ -341,6 +395,8 @@ Pošalji email
 
 <div id="status" class="message"></div>
 
+<!-- HISTORIJA EMAILOVA -->
+
 <div class="history">
 
     <div class="history-toolbar">
@@ -357,9 +413,11 @@ Pošalji email
         <option value="mca2017@docbizhub.com">
             mca2017@docbizhub.com
         </option>
+
         <option value="bosnaniless@docbizhub.com">
             bosnaniless@docbizhub.com
         </option>
+
         <option value="ALL">
             Sve poruke iz MAILOVI_RESEND
         </option>
@@ -379,12 +437,12 @@ Pošalji email
                     <th>Primalac</th>
                     <th>Pošiljalac</th>
                     <th>Naslov</th>
-                    <th>Sadržaj</th>
+                    <th>Sadržaj – klikni za cijeli tekst</th>
                     <th>Tip</th>
                     <th>Status</th>
                     <th>Model</th>
                     <th>Datum</th>
-                    <th>Detalji</th>
+                    <th>Detalji – klikni za cijeli tekst</th>
                     <th>Odgovor na ID</th>
                 </tr>
             </thead>
@@ -539,6 +597,33 @@ function addCell(row, value, className) {
     if (className) cell.className = className;
 
     row.appendChild(cell);
+    return cell;
+}
+
+/* PROŠIRIVI SADRŽAJ */
+
+function addExpandableCell(row, value) {
+
+    const cell = document.createElement("td");
+
+    const content = document.createElement("div");
+
+    content.className = "expandable-text";
+
+    content.textContent =
+        value === null || value === undefined || value === ""
+        ? "—"
+        : String(value);
+
+    content.title = "Kliknite za prikaz kompletnog teksta";
+
+    content.addEventListener("click", function() {
+        this.classList.toggle("expanded");
+    });
+
+    cell.appendChild(content);
+    row.appendChild(cell);
+
     return cell;
 }
 
@@ -721,12 +806,6 @@ async function loadHistory() {
 
         const selectedFilter = $("historyFilter").value;
 
-        /*
-         * Učitavamo sve kolone.
-         * Tako izbegavamo grešku zbog nepostojeće kolone
-         * u ručno navedenom spisku kolona.
-         */
-
         const { data, error } = await DOCBIZ_SUPABASE
             .from(HISTORY_TABLE)
             .select("*")
@@ -736,10 +815,7 @@ async function loadHistory() {
 
         let filteredData = data || [];
 
-        /*
-         * FILTER PO ADRESI:
-         * Pretražuje primaoca I pošiljaoca.
-         */
+        /* FILTER PO ADRESI */
 
         if (selectedFilter !== "ALL") {
 
@@ -757,9 +833,7 @@ async function loadHistory() {
             });
         }
 
-        /*
-         * SORTIRANJE PO DATUMU
-         */
+        /* SORTIRANJE PO DATUMU */
 
         filteredData.sort((a, b) => {
 
@@ -791,7 +865,10 @@ async function loadHistory() {
             addCell(row, mail.EMAIL_PRIMAOCA);
             addCell(row, mail.EMAIL_POSILJAOCA);
             addCell(row, mail.NASLOV);
-            addCell(row, mail.SADRZAJ, "email-content");
+
+            /* ŠIROK I PROŠIRIV SADRŽAJ */
+            addExpandableCell(row, mail.SADRZAJ);
+
             addCell(row, mail.TIP);
 
             const statusCell = document.createElement("td");
@@ -805,7 +882,10 @@ async function loadHistory() {
 
             addCell(row, mail.MODEL_KORISTEN);
             addCell(row, formatDate(mail.CREATED_AT));
-            addCell(row, mail.DETALJI, "email-content");
+
+            /* PROŠIRIVI DETALJI */
+            addExpandableCell(row, mail.DETALJI);
+
             addCell(row, mail.ODGOVOR_NA_ID);
 
             historyBody.appendChild(row);

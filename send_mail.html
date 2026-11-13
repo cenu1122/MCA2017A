@@ -387,8 +387,8 @@ tr:hover td { background: #f8fafc; }
             <select id="statusFilter">
                 <option value="ALL">Svi statusi</option>
                 <option value="POSLANO">POSLANO</option>
-                <option value="OTVORENO">OTVORENO</option>
-                <option value="KLIKNUTO">KLIKNUTO</option>
+                <option value="OTVOREN">OTVOREN</option>
+                <option value="KLIKNUT">KLIKNUT</option>
                 <option value="ISPORUCENO">ISPORUCENO</option>
                 <option value="ODBIJENO">ODBIJENO</option>
             </select>
@@ -595,6 +595,90 @@ $("previewButton").addEventListener("click", function() {
     alert("PREGLED EMAILA\n\nPošiljalac: " + SENDER_NAME + " <" + SENDER_EMAIL + ">\nPrimalac: " + primalac + "\n\nNaslov: " + subject + "\n\n" + tekst);
 });
 
+
+function normalizeStatus(value) {
+    return String(value ?? "").trim().toLocaleLowerCase("bs");
+}
+
+async function loadStatusOptions() {
+    const statusFilter = $("statusFilter");
+    const previousValue = statusFilter.value;
+
+    try {
+        const uniqueStatuses = new Map();
+        const pageSize = 1000;
+        let offset = 0;
+
+        while (true) {
+            const { data, error } = await DOCBIZ_SUPABASE
+                .from(HISTORY_TABLE)
+                .select("STATUS")
+                .range(offset, offset + pageSize - 1);
+
+            if (error) throw error;
+
+            const rows = data || [];
+
+            rows.forEach(mail => {
+                const originalStatus = String(mail.STATUS ?? "").trim();
+
+                if (!originalStatus) return;
+
+                const normalized = normalizeStatus(originalStatus);
+
+                if (!uniqueStatuses.has(normalized)) {
+                    uniqueStatuses.set(normalized, originalStatus);
+                }
+            });
+
+            if (rows.length < pageSize) break;
+
+            offset += pageSize;
+        }
+
+        // Sortiranje statusa abecedno
+        const statuses = [...uniqueStatuses.entries()]
+            .sort((a, b) => a[1].localeCompare(b[1], "bs"));
+
+        // Brisanje starih opcija
+        statusFilter.innerHTML = "";
+
+        // Opcija za sve statuse
+        const allOption = document.createElement("option");
+        allOption.value = "ALL";
+        allOption.textContent = "Svi statusi";
+        statusFilter.appendChild(allOption);
+
+        // Dodavanje jedinstvenih statusa
+        statuses.forEach(([normalized, original]) => {
+            const option = document.createElement("option");
+
+            option.value = normalized;
+            option.textContent = original;
+
+            statusFilter.appendChild(option);
+        });
+
+        // Vraćanje prethodno izabranog statusa
+        if ([...statusFilter.options].some(option =>
+            option.value === previousValue
+        )) {
+            statusFilter.value = previousValue;
+        } else {
+            statusFilter.value = "ALL";
+        }
+
+        console.log("Učitani jedinstveni statusi:", statuses);
+
+    } catch (error) {
+        console.error("GREŠKA PRI UČITAVANJU STATUSA:", error);
+        showError(
+            historyStatus,
+            "Greška pri učitavanju statusa: " + error.message
+        );
+    }
+}
+    
 async function loadHistory() {
     clearMessage(historyStatus);
     historyBody.innerHTML = "";
@@ -645,11 +729,10 @@ async function loadHistory() {
 
         // 3. FILTER PO STATUSU (Neosjetljiv na velika/mala slova)
         if (statusFilter !== "ALL") {
-            filteredData = filteredData.filter(mail => {
-                const currentStatus = String(mail.STATUS || "").trim().toLowerCase();
-                return currentStatus === statusFilter.trim().toLowerCase();
-            });
-        }
+    filteredData = filteredData.filter(mail => {
+        return normalizeStatus(mail.STATUS) === statusFilter;
+    });
+}
 
         // SORTIRANJE PO DATUMU
         filteredData.sort((a, b) => {

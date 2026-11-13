@@ -374,14 +374,20 @@ tr:hover td { background: #f8fafc; }
             </select>
         </div>
 
-        <div class="filter-group">
-            <label for="directionFilter">Vrsta email komunikacije:</label>
-            <select id="directionFilter">
-                <option value="ALL">Sve poruke</option>
-                <option value="OUT" selected>Odlazne poruke</option>
-                <option value="IN">Dolazne poruke</option>
-            </select>
-        </div>
+      
+<div class="filter-group">
+    <label for="statusFilter">Status poruke:</label>
+    <select id="statusFilter">
+        <option value="ALL">Sve poruke</option>
+        <option value="POSLANO">POSLANO</option>
+        <option value="OTVOREN">OTVOREN</option>
+        <option value="KLIKNUT">KLIKNUT</option>
+        <option value="DOGOVORENO">DOGOVORENO</option>
+        <option value="ISPORUCENO">ISPORUCENO</option>
+        <option value="ODBIJENO">ODBIJENO</option>
+    </select>
+</div>
+
 
         <div class="filter-group">
             <label for="statusFilter">Status poruke:</label>

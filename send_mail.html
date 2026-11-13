@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="bs">
 <head>
@@ -215,7 +214,7 @@ button:disabled {
 table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 1500px;
+    min-width: 1400px;
     table-layout: fixed;
 }
 
@@ -237,13 +236,12 @@ th:nth-child(1), td:nth-child(1) { width: 65px; }
 th:nth-child(2), td:nth-child(2) { width: 180px; }
 th:nth-child(3), td:nth-child(3) { width: 180px; }
 th:nth-child(4), td:nth-child(4) { width: 190px; }
-th:nth-child(5), td:nth-child(5) { width: 450px; }
+th:nth-child(5), td:nth-child(5) { width: 400px; }
 th:nth-child(6), td:nth-child(6) { width: 100px; }
-th:nth-child(7), td:nth-child(7) { width: 110px; }
-th:nth-child(8), td:nth-child(8) { width: 130px; }
-th:nth-child(9), td:nth-child(9) { width: 155px; }
-th:nth-child(10), td:nth-child(10) { width: 300px; }
-th:nth-child(11), td:nth-child(11) { width: 130px; }
+th:nth-child(7), td:nth-child(7) { width: 120px; }
+th:nth-child(8), td:nth-child(8) { width: 150px; }
+th:nth-child(9), td:nth-child(9) { width: 300px; }
+th:nth-child(10), td:nth-child(10) { width: 120px; }
 
 tr:hover td { background: #f8fafc; }
 
@@ -253,7 +251,6 @@ tr:hover td { background: #f8fafc; }
     -webkit-line-clamp: 2;
     overflow: hidden;
     overflow-wrap: anywhere;
-    white-space: pre-wrap;
     line-height: 1.5;
     max-height: 3em;
     cursor: pointer;
@@ -274,11 +271,9 @@ tr:hover td { background: #f8fafc; }
     -webkit-line-clamp: unset;
     max-height: none;
     overflow: visible;
-    white-space: pre-wrap;
     background: #eff6ff;
     border: 1px solid #93c5fd;
     padding: 12px;
-    min-height: 60px;
 }
 
 .status-label {
@@ -298,11 +293,7 @@ tr:hover td { background: #f8fafc; }
 
 @media(max-width:600px) {
     body { padding: 12px; }
-
-    .container {
-        margin: 10px auto;
-        padding: 18px;
-    }
+    .container { margin: 10px auto; padding: 18px; }
 }
 </style>
 </head>
@@ -315,59 +306,39 @@ tr:hover td { background: #f8fafc; }
 <div class="subtitle">Upravljanje i slanje poslovnih emailova</div>
 
 <section id="loginPanel">
-
 <h2>Prijava na sistem</h2>
-
 <form id="loginForm">
-
 <label for="email">Email adresa</label>
 <input type="email" id="email" autocomplete="username" required>
 
 <label for="password">Lozinka</label>
-<input type="password" id="password"
-autocomplete="current-password" required>
+<input type="password" id="password" autocomplete="current-password" required>
 
-<button type="button" class="secondary" id="togglePassword">
-Prikaži lozinku
-</button>
-
-<button type="submit" class="primary" id="loginButton">
-Prijavi se
-</button>
-
+<button type="button" class="secondary" id="togglePassword">Prikaži lozinku</button>
+<button type="submit" class="primary" id="loginButton">Prijavi se</button>
 </form>
 
-<button type="button" class="secondary" id="resetButton">
-Zaboravljena lozinka?
-</button>
-
+<button type="button" class="secondary" id="resetButton">Zaboravljena lozinka?</button>
 <div id="loginMessage" class="message"></div>
 
 <div class="diagnostic">
 <h3>DOCBIZHUB – Sistemska dijagnostika</h3>
 <pre id="diagnosticMessage">Provjera sistema u toku...</pre>
 </div>
-
 </section>
 
 <section id="adminPanel" class="hidden">
-
 <div class="topbar">
 <div>
 <h2>Slanje poslovnih emailova</h2>
 <div id="userInfo"></div>
 </div>
-
-<button type="button" class="logout" id="logoutButton">
-Odjava
-</button>
+<button type="button" class="logout" id="logoutButton">Odjava</button>
 </div>
 
 <form id="offerForm">
-
 <label for="primalac">Email adresa primaoca</label>
-<input type="email" id="primalac"
-placeholder="firma@example.com" required>
+<input type="email" id="primalac" placeholder="firma@example.com" required>
 
 <div class="sender-info">
 <strong>Naziv pošiljaoca:</strong> mca2017<br>
@@ -375,74 +346,57 @@ placeholder="firma@example.com" required>
 </div>
 
 <label for="subject">Naslov emaila</label>
-<input type="text" id="subject"
-placeholder="Naslov emaila" required>
+<input type="text" id="subject" placeholder="Naslov emaila" required>
 
 <label for="tekst">Tekst emaila</label>
-<textarea id="tekst"
-placeholder="Unesite tekst emaila..."
-required></textarea>
+<textarea id="tekst" placeholder="Unesite tekst emaila..." required></textarea>
 
-<button type="button" class="secondary" id="previewButton">
-Pregled emaila
-</button>
-
-<button type="submit" class="primary" id="sendButton">
-Pošalji email
-</button>
-
+<button type="button" class="secondary" id="previewButton">Pregled emaila</button>
+<button type="submit" class="primary" id="sendButton">Pošalji email</button>
 </form>
 
 <div id="status" class="message"></div>
 
 <div class="history">
-
     <div class="history-toolbar">
         <h2>Historija email komunikacije</h2>
-
-        <button type="button" class="secondary" id="refreshHistory">
-            Osvježi historiju
-        </button>
+        <button type="button" class="secondary" id="refreshHistory">Osvježi historiju</button>
     </div>
 
-    <!-- OBA FILTERA -->
-
+    <!-- FILTERI -->
     <div class="filters">
-
         <div class="filter-group">
             <label for="historyFilter">Filtriraj po email adresi:</label>
-
             <select id="historyFilter">
-                <option value="mca2017@docbizhub.com">
-                    mca2017@docbizhub.com
-                </option>
-
-                <option value="bosnaniless@docbizhub.com">
-                    bosnaniless@docbizhub.com
-                </option>
-
-                <option value="ALL">
-                    Sve email adrese
-                </option>
+                <option value="mca2017@docbizhub.com">mca2017@docbizhub.com</option>
+                <option value="bosnaniless@docbizhub.com">bosnaniless@docbizhub.com</option>
+                <option value="ALL">Sve email adrese</option>
             </select>
         </div>
 
         <div class="filter-group">
             <label for="directionFilter">Vrsta email komunikacije:</label>
-
             <select id="directionFilter">
                 <option value="ALL">Sve poruke</option>
-                <option value="OUT">Odlazne poruke</option>
+                <option value="OUT" selected>Odlazne poruke</option>
                 <option value="IN">Dolazne poruke</option>
             </select>
         </div>
 
+        <div class="filter-group">
+            <label for="statusFilter">Status poruke:</label>
+            <select id="statusFilter">
+                <option value="ALL">Svi statusi</option>
+                <option value="POSLANO">POSLANO</option>
+                <option value="OTVORENO">OTVORENO</option>
+                <option value="KLIKNUTO">KLIKNUTO</option>
+                <option value="ISPORUCENO">ISPORUCENO</option>
+                <option value="ODBIJENO">ODBIJENO</option>
+            </select>
+        </div>
     </div>
 
-    <div class="history-count" id="historyCount">
-        Učitavanje...
-    </div>
-
+    <div class="history-count" id="historyCount">Učitavanje...</div>
     <div id="historyStatus" class="message"></div>
 
     <div class="table-wrapper">
@@ -453,123 +407,62 @@ Pošalji email
                     <th>Primalac</th>
                     <th>Pošiljalac</th>
                     <th>Naslov</th>
-                    <th>Sadržaj – klikni za cijeli tekst</th>
+                    <th>Sadržaj – klikni za tekst</th>
                     <th>Tip</th>
                     <th>Status</th>
-                    <th>Model</th>
                     <th>Datum</th>
-                    <th>Detalji – klikni za cijeli tekst</th>
+                    <th>Detalji – klikni za tekst</th>
                     <th>Odgovor na ID</th>
                 </tr>
             </thead>
-
             <tbody id="historyBody">
                 <tr>
-                    <td colspan="11" class="empty">
-                        Učitavanje emailova...
-                    </td>
+                    <td colspan="10" class="empty">Učitavanje emailova...</td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
-
 </section>
 </div>
 
 <script>
 (function DOCBIZHUB_APP() {
-
 "use strict";
-
 if (window.__DOCBIZHUB_APP_INITIALIZED__) return;
 window.__DOCBIZHUB_APP_INITIALIZED__ = true;
 
-/* SUPABASE KONFIGURACIJA */
-
-const SUPABASE_URL =
-"https://uduwpvdjmanrgpumdrfh.supabase.co";
-
-const SUPABASE_PUBLISHABLE_KEY =
-"sb_publishable_IfX6dxz-ILfYK_3VgelcMw_tYOX0y45";
-
-/* EDGE FUNCTION */
-
-const FUNCTION_NAME =
-"SALJI_MAIL-_FIRMAMA_bEZ_AI_gERNERISANJA_PORUKA";
-
-/* POŠILJALAC */
-
+const SUPABASE_URL = "https://uduwpvdjmanrgpumdrfh.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_IfX6dxz-ILfYK_3VgelcMw_tYOX0y45";
+const FUNCTION_NAME = "SALJI_MAIL-_FIRMAMA_bEZ_AI_gERNERISANJA_PORUKA";
 const SENDER_NAME = "mca2017";
 const SENDER_EMAIL = "mca2017@docbizhub.com";
-
-/* POZNATE INTERNE EMAIL ADRESE */
-
-const KNOWN_EMAILS = [
-    "mca2017@docbizhub.com",
-    "bosnaniless@docbizhub.com"
-];
-
-/* TABELA */
-
+const KNOWN_EMAILS = ["mca2017@docbizhub.com", "bosnaniless@docbizhub.com"];
 const HISTORY_TABLE = "MAILOVI_RESEND";
 
-/* SUPABASE */
-
-if (!window.supabase ||
-    typeof window.supabase.createClient !== "function") {
-
-    document.body.innerHTML =
-    "<h2>Supabase biblioteka nije učitana.</h2>";
-
+if (!window.supabase || typeof window.supabase.createClient !== "function") {
+    document.body.innerHTML = "<h2>Supabase biblioteka nije učitana.</h2>";
     return;
 }
 
 const originalFetch = window.fetch.bind(window);
 
 async function diagnosticFetch(input, init) {
-
     const request = new Request(input, init);
     const url = new URL(request.url);
-
-    if (!url.hostname.endsWith(".supabase.co")) {
-        return originalFetch(request);
-    }
-
+    if (!url.hostname.endsWith(".supabase.co")) return originalFetch(request);
     try {
         const response = await originalFetch(request);
-
-        if (!response.ok) {
-            console.error(
-                "SUPABASE HTTP GREŠKA:",
-                response.status,
-                await response.clone().text()
-            );
-        }
-
         return response;
-
     } catch (error) {
-        console.error("FETCH GREŠKA:", error);
         throw error;
     }
 }
 
-const DOCBIZ_SUPABASE = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY,
-    {
-        global: { fetch: diagnosticFetch },
-        auth: {
-            autoRefreshToken: true,
-            persistSession: true,
-            detectSessionInUrl: true,
-            storageKey: "docbizhub_auth_session"
-        }
-    }
-);
-
-/* ELEMENTI */
+const DOCBIZ_SUPABASE = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+    global: { fetch: diagnosticFetch },
+    auth: { autoRefreshToken: true, persistSession: true, detectSessionInUrl: true, storageKey: "docbizhub_auth_session" }
+});
 
 const $ = id => document.getElementById(id);
 
@@ -577,19 +470,14 @@ const loginPanel = $("loginPanel");
 const adminPanel = $("adminPanel");
 const loginForm = $("loginForm");
 const offerForm = $("offerForm");
-
 const loginButton = $("loginButton");
 const sendButton = $("sendButton");
-
 const loginMessage = $("loginMessage");
 const status = $("status");
 const historyStatus = $("historyStatus");
-
 const passwordInput = $("password");
 const historyBody = $("historyBody");
 const historyCount = $("historyCount");
-
-/* PORUKE */
 
 function showError(element, message) {
     element.textContent = message;
@@ -606,68 +494,44 @@ function clearMessage(element) {
     element.className = "message";
 }
 
-/* SIGURAN PRIKAZ PODATAKA */
-
-function addCell(row, value, className) {
-
+function addCell(row, value) {
     const cell = document.createElement("td");
-
-    cell.textContent =
-        value === null || value === undefined || value === ""
-        ? "—"
-        : String(value);
-
-    if (className) cell.className = className;
-
+    cell.textContent = (value === null || value === undefined || value === "") ? "—" : String(value);
     row.appendChild(cell);
     return cell;
 }
 
-/* PROŠIRIVI SADRŽAJ */
-
-function addExpandableCell(row, value) {
-
+// Funkcija za prikaz HTML sadržaja (renderuje HTML tagove umjesto običnog teksta)
+function addHtmlExpandableCell(row, value) {
     const cell = document.createElement("td");
-
     const content = document.createElement("div");
-
     content.className = "expandable-text";
+    
+    const textVal = (value === null || value === undefined || value === "") ? "—" : String(value);
+    
+    // Ako tekst izgleda kao HTML, ubaci ga preko innerHTML, inače textContent
+    if (textVal.includes("<") && textVal.includes(">")) {
+        content.innerHTML = textVal;
+    } else {
+        content.textContent = textVal;
+    }
 
-    content.textContent =
-        value === null || value === undefined || value === ""
-        ? "—"
-        : String(value);
-
-    content.title = "Kliknite za prikaz kompletnog teksta";
-
+    content.title = "Kliknite za prikaz kompletnog sadržaja";
     content.addEventListener("click", function() {
         this.classList.toggle("expanded");
     });
 
     cell.appendChild(content);
     row.appendChild(cell);
-
     return cell;
 }
 
 function formatDate(value) {
-
     if (!value) return "—";
-
     const date = new Date(value);
-
     if (Number.isNaN(date.getTime())) return String(value);
-
-    return date.toLocaleString("bs-BA", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit"
-    });
+    return date.toLocaleString("bs-BA", { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
 }
-
-/* PANELI */
 
 function showLogin() {
     loginPanel.classList.remove("hidden");
@@ -675,160 +539,74 @@ function showLogin() {
 }
 
 function showAdmin(user) {
-
     loginPanel.classList.add("hidden");
     adminPanel.classList.remove("hidden");
-
-    $("userInfo").textContent =
-        "Prijavljeni korisnik: " + (user.email || "");
-
+    $("userInfo").textContent = "Prijavljeni korisnik: " + (user.email || "");
     loadHistory();
 }
 
-/* LOZINKA */
-
 $("togglePassword").addEventListener("click", function() {
-
     const hidden = passwordInput.type === "password";
-
     passwordInput.type = hidden ? "text" : "password";
-
-    this.textContent =
-        hidden ? "Sakrij lozinku" : "Prikaži lozinku";
+    this.textContent = hidden ? "Sakrij lozinku" : "Prikaži lozinku";
 });
 
-/* STATUS KORISNIKA */
-
-async function updateUserStatus(user, online) {
-
-    if (!user?.id) return;
-
-    try {
-
-        const { error } = await DOCBIZ_SUPABASE
-            .from("POSAO_KORISNICI")
-            .update({
-                IS_ONLINE: online,
-                LAST_SEEN: new Date().toISOString()
-            })
-            .eq("USER", user.id);
-
-        if (error) {
-            console.warn("Status korisnika:", error.message);
-        }
-
-    } catch (error) {
-        console.warn(error);
-    }
-}
-
-/* PRIJAVA */
-
 loginForm.addEventListener("submit", async function(event) {
-
     event.preventDefault();
-
     clearMessage(loginMessage);
-
     loginButton.disabled = true;
     loginButton.textContent = "Prijava u toku...";
-
     try {
-
-        const { data, error } =
-            await DOCBIZ_SUPABASE.auth.signInWithPassword({
-                email: $("email").value.trim(),
-                password: passwordInput.value
-            });
-
+        const { data, error } = await DOCBIZ_SUPABASE.auth.signInWithPassword({
+            email: $("email").value.trim(),
+            password: passwordInput.value
+        });
         if (error) throw error;
-
-        await updateUserStatus(data.user, true);
-
         showAdmin(data.user);
         showSuccess(status, "Uspješno ste prijavljeni.");
-
     } catch (error) {
-
-        showError(
-            loginMessage,
-            "Prijava nije uspjela: " + error.message
-        );
-
+        showError(loginMessage, "Prijava nije uspjela: " + error.message);
     } finally {
-
         loginButton.disabled = false;
         loginButton.textContent = "Prijavi se";
     }
 });
 
-/* RESET LOZINKE */
-
 $("resetButton").addEventListener("click", async function() {
-
     const email = $("email").value.trim();
-
     if (!email) {
         showError(loginMessage, "Prvo unesite email adresu.");
         return;
     }
-
     try {
-
-        const { error } =
-            await DOCBIZ_SUPABASE.auth.resetPasswordForEmail(
-                email,
-                { redirectTo: window.location.origin }
-            );
-
+        const { error } = await DOCBIZ_SUPABASE.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin });
         if (error) throw error;
-
-        showSuccess(
-            loginMessage,
-            "Ako je email registrovan, dobit ćete poruku za promjenu lozinke."
-        );
-
+        showSuccess(loginMessage, "Ako je email registrovan, dobit ćete poruku za promjenu lozinke.");
     } catch (error) {
-
         showError(loginMessage, "Greška: " + error.message);
     }
 });
 
-/* PREGLED EMAILA */
-
 $("previewButton").addEventListener("click", function() {
-
     const primalac = $("primalac").value.trim();
     const subject = $("subject").value.trim();
     const tekst = $("tekst").value.trim();
-
     if (!primalac || !subject || !tekst) {
         showError(status, "Popunite sva polja.");
         return;
     }
-
-    alert(
-        "PREGLED EMAILA\n\n" +
-        "Pošiljalac: " + SENDER_NAME + " <" + SENDER_EMAIL + ">\n" +
-        "Primalac: " + primalac + "\n\n" +
-        "Naslov: " + subject + "\n\n" +
-        tekst
-    );
+    alert("PREGLED EMAILA\n\nPošiljalac: " + SENDER_NAME + " <" + SENDER_EMAIL + ">\nPrimalac: " + primalac + "\n\nNaslov: " + subject + "\n\n" + tekst);
 });
 
-/* UČITAVANJE HISTORIJE EMAILOVA */
-
 async function loadHistory() {
-
     clearMessage(historyStatus);
-
     historyBody.innerHTML = "";
     historyCount.textContent = "Učitavanje emailova...";
 
     try {
-
         const selectedFilter = $("historyFilter").value;
         const directionFilter = $("directionFilter").value;
+        const statusFilter = $("statusFilter").value;
 
         const { data, error } = await DOCBIZ_SUPABASE
             .from(HISTORY_TABLE)
@@ -839,155 +617,105 @@ async function loadHistory() {
 
         let filteredData = data || [];
 
-        /* FILTER PO EMAIL ADRESI */
-
+        // 1. FILTER PO EMAIL ADRESI
         if (selectedFilter !== "ALL") {
-
             const email = selectedFilter.toLowerCase();
-
             filteredData = filteredData.filter(mail => {
-
-                const primalac =
-                    String(mail.EMAIL_PRIMAOCA || "").toLowerCase();
-
-                const posiljalac =
-                    String(mail.EMAIL_POSILJAOCA || "").toLowerCase();
-
+                const primalac = String(mail.EMAIL_PRIMAOCA || "").toLowerCase();
+                const posiljalac = String(mail.EMAIL_POSILJAOCA || "").toLowerCase();
                 return primalac === email || posiljalac === email;
             });
         }
 
-        /*
-           FILTER PO SMJERU:
-
-           ODLazne: interna adresa je pošiljalac.
-           DOLAZNE: interna adresa je primalac.
-        */
-
+        // 2. FILTER PO SMJERU (Odlazne / Dolazne)
         if (directionFilter === "OUT") {
-
             filteredData = filteredData.filter(mail => {
-
-                const posiljalac =
-                    String(mail.EMAIL_POSILJAOCA || "").toLowerCase();
-
+                const posiljalac = String(mail.EMAIL_POSILJAOCA || "").toLowerCase();
                 if (selectedFilter !== "ALL") {
                     return posiljalac === selectedFilter.toLowerCase();
                 }
-
                 return KNOWN_EMAILS.includes(posiljalac);
             });
-        }
-
-        if (directionFilter === "IN") {
-
+        } else if (directionFilter === "IN") {
             filteredData = filteredData.filter(mail => {
-
-                const primalac =
-                    String(mail.EMAIL_PRIMAOCA || "").toLowerCase();
-
+                const primalac = String(mail.EMAIL_PRIMAOCA || "").toLowerCase();
                 if (selectedFilter !== "ALL") {
                     return primalac === selectedFilter.toLowerCase();
                 }
-
                 return KNOWN_EMAILS.includes(primalac);
             });
         }
 
-        /* SORTIRANJE PO DATUMU */
+        // 3. FILTER PO STATUSU
+        if (statusFilter !== "ALL") {
+            filteredData = filteredData.filter(mail => {
+                const currentStatus = String(mail.STATUS || "").toUpperCase();
+                return currentStatus === statusFilter.toUpperCase();
+            });
+        }
 
+        // SORTIRANJE PO DATUMU
         filteredData.sort((a, b) => {
-
             const dateA = new Date(a.CREATED_AT || 0).getTime();
             const dateB = new Date(b.CREATED_AT || 0).getTime();
-
             return dateB - dateA;
         });
 
         historyBody.innerHTML = "";
 
         if (filteredData.length === 0) {
-
-            historyBody.innerHTML =
-                '<tr><td colspan="11" class="empty">' +
-                'Nema pronađenih emailova za izabrane filtere.' +
-                '</td></tr>';
-
+            historyBody.innerHTML = '<tr><td colspan="10" class="empty">Nema pronađenih emailova za izabrane filtere.</td></tr>';
             historyCount.textContent = "Pronađeno: 0 emailova";
-
             return;
         }
 
         filteredData.forEach(mail => {
-
             const row = document.createElement("tr");
 
             addCell(row, mail.ID);
             addCell(row, mail.EMAIL_PRIMAOCA);
             addCell(row, mail.EMAIL_POSILJAOCA);
             addCell(row, mail.NASLOV);
-
-            addExpandableCell(row, mail.SADRZAJ);
+            
+            // Sadržaj kao HTML/tekst
+            addHtmlExpandableCell(row, mail.SADRZAJ);
 
             addCell(row, mail.TIP);
 
             const statusCell = document.createElement("td");
             const statusLabel = document.createElement("span");
-
             statusLabel.className = "status-label";
             statusLabel.textContent = mail.STATUS || "—";
-
             statusCell.appendChild(statusLabel);
             row.appendChild(statusCell);
 
-            addCell(row, mail.MODEL_KORISTEN);
             addCell(row, formatDate(mail.CREATED_AT));
-
-            addExpandableCell(row, mail.DETALJI);
+            
+            // Detalji (JSON) kao tekst ili proširivo
+            addHtmlExpandableCell(row, mail.DETALJI);
 
             addCell(row, mail.ODGOVOR_NA_ID);
 
             historyBody.appendChild(row);
         });
 
-        historyCount.textContent =
-            "Pronađeno: " + filteredData.length +
-            " emailova (maksimalno 500 učitanih).";
+        historyCount.textContent = "Pronađeno: " + filteredData.length + " emailova.";
 
     } catch (error) {
-
         console.error("HISTORIJA GREŠKA:", error);
-
-        historyBody.innerHTML =
-            '<tr><td colspan="11" class="empty">' +
-            'Greška pri učitavanju historije.' +
-            '</td></tr>';
-
+        historyBody.innerHTML = '<tr><td colspan="10" class="empty">Greška pri učitavanju historije.</td></tr>';
         historyCount.textContent = "Historija nije učitana.";
-
-        showError(
-            historyStatus,
-            "Greška pri učitavanju: " + error.message +
-            "\nProvjerite da li tabela MAILOVI_RESEND postoji " +
-            "i da li korisnik ima odgovarajuće RLS dozvole."
-        );
+        showError(historyStatus, "Greška pri učitavanju: " + error.message);
     }
 }
 
-/* OSVJEŽAVANJE I OBA FILTERA */
-
 $("refreshHistory").addEventListener("click", loadHistory);
-
 $("historyFilter").addEventListener("change", loadHistory);
-
 $("directionFilter").addEventListener("change", loadHistory);
-
-/* SLANJE EMAILA */
+$("statusFilter").addEventListener("change", loadHistory);
 
 offerForm.addEventListener("submit", async function(event) {
-
     event.preventDefault();
-
     clearMessage(status);
 
     const primalac = $("primalac").value.trim();
@@ -999,245 +727,65 @@ offerForm.addEventListener("submit", async function(event) {
         return;
     }
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(primalac)) {
-        showError(status, "Email primaoca nije ispravan.");
-        return;
-    }
-
-    const potvrda = confirm(
-        "Da li želite poslati email?\n\n" +
-        "Primalac: " + primalac + "\n" +
-        "Pošiljalac: " + SENDER_NAME + " <" + SENDER_EMAIL + ">\n" +
-        "Naslov: " + subject
-    );
-
-    if (!potvrda) return;
-
     sendButton.disabled = true;
     sendButton.textContent = "Slanje u toku...";
 
     try {
-
-        const { data, error } =
-            await DOCBIZ_SUPABASE.functions.invoke(
-                FUNCTION_NAME,
-                {
-                    body: {
-                        action: "POSALJI",
-                        primalac: primalac,
-                        posiljalac: SENDER_EMAIL,
-                        naziv_posiljaoca: SENDER_NAME,
-                        subject: subject,
-                        tekst: tekst
-                    }
+        const { data, error } = await DOCBIZ_SUPABASE.functions.invoke(
+            FUNCTION_NAME,
+            {
+                body: {
+                    action: "POSALJI",
+                    primalac: primalac,
+                    posiljalac: SENDER_EMAIL,
+                    naziv_posiljaoca: SENDER_NAME,
+                    subject: subject,
+                    tekst: tekst
                 }
-            );
-
-        if (error) {
-
-            let detalji = error.message || "Nepoznata greška";
-
-            if (error.context instanceof Response) {
-
-                detalji +=
-                    "\nHTTP STATUS: " + error.context.status;
-
-                try {
-                    detalji +=
-                        "\n" + await error.context.clone().text();
-                } catch (e) {}
             }
-
-            throw new Error(detalji);
-        }
-
-        console.log("ODGOVOR EDGE FUNCTION:", data);
-
-        if (!data || data.success !== true) {
-            throw new Error(
-                data?.message || "Server nije potvrdio slanje."
-            );
-        }
-
-        showSuccess(
-            status,
-            "Email je uspješno poslan na: " +
-            (data.primalac || primalac)
         );
 
+        if (error) throw new Error(error.message);
+
+        showSuccess(status, "Email je uspješno poslan na: " + primalac);
         offerForm.reset();
-
         await loadHistory();
-
     } catch (error) {
-
-        console.error("SLANJE GREŠKA:", error);
-
-        showError(
-            status,
-            "SLANJE NIJE USPJELO.\n\n" + error.message
-        );
-
+        showError(status, "SLANJE NIJE USPJELO.\n\n" + error.message);
     } finally {
-
         sendButton.disabled = false;
         sendButton.textContent = "Pošalji email";
     }
 });
 
-/* ODJAVA */
-
 $("logoutButton").addEventListener("click", async function() {
-
     try {
-
-        const { data, error: sessionError } =
-            await DOCBIZ_SUPABASE.auth.getSession();
-
-        if (sessionError) throw sessionError;
-
-        if (data.session) {
-            await updateUserStatus(data.session.user, false);
-        }
-
-        const { error } =
-            await DOCBIZ_SUPABASE.auth.signOut();
-
-        if (error) throw error;
-
+        await DOCBIZ_SUPABASE.auth.signOut();
         showLogin();
-
-        clearMessage(loginMessage);
-        clearMessage(status);
-        clearMessage(historyStatus);
-
     } catch (error) {
-
         showError(status, "Greška pri odjavi: " + error.message);
     }
 });
 
-/* PRAĆENJE SESIJE */
-
-DOCBIZ_SUPABASE.auth.onAuthStateChange(
-    function(event, session) {
-
-        console.log("DOCBIZHUB AUTH:", event);
-
-        if (session?.user) {
-            showAdmin(session.user);
-        } else {
-            showLogin();
-        }
+DOCBIZ_SUPABASE.auth.onAuthStateChange(function(event, session) {
+    if (session?.user) {
+        showAdmin(session.user);
+    } else {
+        showLogin();
     }
-);
-
-/* DIJAGNOSTIKA */
-
-async function DOCBIZ_DIJAGNOSTIKA() {
-
-    const report = [];
-
-    function check(name, ok, detail) {
-        report.push(
-            (ok ? "✓ ISPRAVNO: " : "✗ GREŠKA: ") +
-            name + "\n" + detail
-        );
-    }
-
-    check(
-        "Supabase biblioteka",
-        !!window.supabase?.createClient,
-        "Biblioteka učitana."
-    );
-
-    check(
-        "Supabase klijent",
-        !!DOCBIZ_SUPABASE?.auth,
-        "Klijent kreiran."
-    );
-
-    check(
-        "Supabase URL",
-        SUPABASE_URL.startsWith("https://"),
-        SUPABASE_URL
-    );
-
-    try {
-
-        const response = await originalFetch(
-            SUPABASE_URL + "/auth/v1/health",
-            {
-                headers: {
-                    apikey: SUPABASE_PUBLISHABLE_KEY
-                }
-            }
-        );
-
-        check(
-            "Supabase Auth server",
-            response.ok,
-            "HTTP " + response.status
-        );
-
-    } catch (error) {
-
-        check("Supabase Auth server", false, error.message);
-    }
-
-    try {
-
-        const { data, error } =
-            await DOCBIZ_SUPABASE.auth.getSession();
-
-        check(
-            "Auth sesija",
-            !error,
-            error ? error.message :
-            data.session ? "Aktivna sesija." : "Nema aktivne sesije."
-        );
-
-    } catch (error) {
-
-        check("Auth sesija", false, error.message);
-    }
-
-    $("diagnosticMessage").textContent = report.join("\n\n");
-    console.table(report);
-}
-
-/* POKRETANJE */
+});
 
 async function initialize() {
-
-    console.log("DOCBIZHUB: Pokretanje.");
-
     try {
-
-        const { data, error } =
-            await DOCBIZ_SUPABASE.auth.getSession();
-
-        if (error) throw error;
-
+        const { data } = await DOCBIZ_SUPABASE.auth.getSession();
         if (data.session?.user) {
             showAdmin(data.session.user);
         } else {
             showLogin();
         }
-
     } catch (error) {
-
         showLogin();
-
-        showError(
-            loginMessage,
-            "Greška pri povezivanju: " + error.message
-        );
     }
-
-    await DOCBIZ_DIJAGNOSTIKA();
-
-    console.log("DOCBIZHUB: Sistem inicijalizovan.");
 }
 
 initialize();

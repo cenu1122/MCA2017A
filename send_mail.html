@@ -382,18 +382,13 @@ tr:hover td { background: #f8fafc; }
             </select>
         </div>
 
-        <div class="filter-group">
-            <label for="statusFilter">Status poruke:</label>
-            <select id="statusFilter">
-                <option value="ALL">Svi statusi</option>
-                <option value="POSLANO">POSLANO</option>
-                <option value="OTVOREN">OTVOREN</option>
-                <option value="KLIKNUT">KLIKNUT</option>
-                <option value="ISPORUCENO">ISPORUCENO</option>
-                <option value="ODBIJENO">ODBIJENO</option>
-            </select>
-        </div>
-    </div>
+      <div class="filter-group">
+    <label for="statusFilter">Status poruke:</label>
+    <select id="statusFilter">
+        <option value="ALL">Svi statusi</option>
+    </select>
+</div>
+    
 
     <div class="history-count" id="historyCount">Učitavanje...</div>
     <div id="historyStatus" class="message"></div>
@@ -681,6 +676,10 @@ async function loadStatusOptions() {
     
 async function loadHistory() {
     clearMessage(historyStatus);
+
+    // Učitaj sve statuse iz baze bez duplikata
+    await loadStatusOptions();
+
     historyBody.innerHTML = "";
     historyCount.textContent = "Učitavanje emailova...";
 

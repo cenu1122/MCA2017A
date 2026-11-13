@@ -305,6 +305,74 @@
       color: var(--muted);
     }
 
+    /* ISTAKNUTI BLOK: MAŠINSKI KAPACITETI I DODATNE USLUGE */
+    .capacity-section {
+      margin: 35px 0 45px;
+      padding: 34px;
+      background: linear-gradient(135deg, #101820, #203746);
+      border: 2px solid var(--blue);
+      border-radius: 10px;
+      box-shadow: 0 14px 32px rgba(16,24,32,.14);
+      color: #fff;
+    }
+
+    .capacity-heading {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    .capacity-heading .eyebrow {
+      color: #65bdf2;
+      margin-bottom: 8px;
+    }
+
+    .capacity-heading h3 {
+      color: #fff;
+      font-size: clamp(24px, 3vw, 32px);
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .capacity-heading p {
+      color: #d7e3ea;
+    }
+
+    .capacity-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .capacity-item {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.18);
+      border-left: 4px solid #2398e0;
+      border-radius: 6px;
+      padding: 17px 19px;
+    }
+
+    .capacity-item strong {
+      display: block;
+      color: #fff;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .capacity-item span {
+      display: block;
+      color: #d7e3ea;
+      font-size: 14px;
+    }
+
+    .capacity-note {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,.2);
+      color: #d7e3ea;
+      text-align: center;
+      font-size: 14px;
+    }
+
     .why-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -518,8 +586,13 @@
 
       .service-grid,
       .why-grid,
-      .gallery-grid {
+      .gallery-grid,
+      .capacity-grid {
         grid-template-columns: 1fr;
+      }
+
+      .capacity-section {
+        padding: 22px 18px;
       }
 
       .about-image img {
@@ -636,15 +709,53 @@
         </p>
       </div>
 
-      <article class="service-card">
-  <div class="service-number">01 / LASERSKA OBRADA</div>
-  <h3>Lasersko sečenje metala</h3>
-  <p>
-    Nudimo lasersko sečenje metala prema dostavljenim dimenzijama,
-    tehničkim crtežima i zahtjevima klijenata. Obrada se definiše
-    prema vrsti materijala, debljini i obliku komada.
-  </p>
-</article>
+      <!-- ISTAKNUTO: MAŠINSKI KAPACITETI I DODATNE USLUGE -->
+      <section class="capacity-section" aria-labelledby="capacityTitle">
+        <div class="capacity-heading">
+          <div class="eyebrow" id="capacityEyebrow">Naši kapaciteti</div>
+          <h3 id="capacityTitle">Mašinski kapaciteti i dodatne usluge</h3>
+          <p id="capacityIntro">Pregled naših mogućnosti obrade i raspoloživih dimenzija.</p>
+        </div>
+
+        <div class="capacity-grid">
+          <div class="capacity-item">
+            <strong id="capacityMillingTitle">Glodanje</strong>
+            <span id="capacityMillingText">Najveća glodalica – hodovi 1000 × 600 mm</span>
+          </div>
+          <div class="capacity-item">
+            <strong id="capacityTurningTitle">Struganje</strong>
+            <span id="capacityTurningText">Kapacitet struga – Ø 250 × 500 mm</span>
+          </div>
+          <div class="capacity-item">
+            <strong id="capacityFlatTitle">Ravno brušenje</strong>
+            <span id="capacityFlatText">Kapacitet – 100 × 500 mm</span>
+          </div>
+          <div class="capacity-item">
+            <strong id="capacityRoundTitle">Obimno brušenje</strong>
+            <span id="capacityRoundText">Kapacitet – Ø 200 × 500 mm</span>
+          </div>
+          <div class="capacity-item">
+            <strong id="capacityErosionTitle">Elektroeroziona obrada</strong>
+            <span id="capacityErosionText">Elektroerozija žicom i elektrodom</span>
+          </div>
+          <div class="capacity-item">
+            <strong id="capacityHeatTitle">Termička obrada</strong>
+            <span id="capacityHeatText">Kaljenje i nitriranje</span>
+          </div>
+          <div class="capacity-item">
+            <strong id="capacitySurfaceTitle">Površinska obrada</strong>
+            <span id="capacitySurfaceText">Bruniranje i hromiranje</span>
+          </div>
+          <div class="capacity-item">
+            <strong id="capacityLaserTitle">Lasersko sečenje</strong>
+            <span id="capacityLaserText">Sečenje materijala laserom prema zahtjevu</span>
+          </div>
+        </div>
+
+        <p class="capacity-note" id="capacityNote">
+          Za ponudu je dovoljno poslati crtež, materijal, količinu i željeni rok izrade.
+        </p>
+      </section>
 
      <div class="service-grid">
 
@@ -669,12 +780,11 @@
   </article>
 
   <article class="service-card">
-    <div class="service-number">03 / GLODANJE METALA</div>
-    <h3>Lasersko sečenje metala</h3>
+    <div class="service-number">03 / BRUŠENJE I DORADA</div>
+    <h3>Brušenje i završna obrada</h3>
     <p>
-      Nudimo lasersko sečenje metala prema dostavljenim dimenzijama,
-      tehničkim crtežima i zahtjevima klijenata. Obrada se definiše
-      prema vrsti materijala, debljini i obliku komada.
+      U ponudi su ravno i obimno brušenje, kao i dodatne operacije
+      površinske i termičke obrade u skladu sa zahtjevima projekta.
     </p>
   </article>
 
@@ -964,14 +1074,33 @@
       aboutEyebrow: "Upoznajte nas",
       aboutTitle: "O nama – Mašinski centar Arsenijević",
       aboutText1: "Mašinski centar Arsenijević je preduzetnička radionica iz Čačka, specijalizovana za mašinsku obradu metala. Poslovanje je započeto 2016. godine, sa ciljem pružanja pouzdanih usluga obrade i izrade metalnih delova prema potrebama kupaca.",
-      aboutText2: "Naš rad obuhvata CNC struganje i CNC glodanje. Radimo sve Inox. Čelik. Al. i Plastike
-U saradnji sa klijentima nastojimo da razumemo svaki zahtev, sagledamo tehničku dokumentaciju i predložimo odgovarajući pristup izradi delova.",
+      aboutText2: "Naš rad obuhvata CNC struganje i CNC glodanje. Radimo inox, čelik, aluminijum i plastiku. U saradnji sa klijentima nastojimo da razumemo svaki zahtev, sagledamo tehničku dokumentaciju i predložimo odgovarajući pristup izradi delova.",
       aboutText3: "Otvoreni smo za upite koji se odnose na pojedinačne komade, kao i na male i srednje serije. Svakom projektu pristupamo pojedinačno, uz pažnju prema tehničkim zahtevima, nameni dela i dogovorenim uslovima.",
       aboutHighlight: "Naš cilj je da budemo pouzdan partner za mašinsku obradu metala i kvalitetnu poslovnu saradnju.",
 
       servicesEyebrow: "Šta radimo",
       servicesTitle: "Naše usluge",
       servicesIntro: "Bavimo se mašinskom obradom metala, sa fokusom na CNC tehnologije i izradu delova prema tehničkoj dokumentaciji.",
+      capacityEyebrow: "Naši kapaciteti",
+      capacityTitle: "Mašinski kapaciteti i dodatne usluge",
+      capacityIntro: "Pregled naših mogućnosti obrade i raspoloživih dimenzija.",
+      capacityMillingTitle: "Glodanje",
+      capacityMillingText: "Najveća glodalica – hodovi 1000 × 600 mm",
+      capacityTurningTitle: "Struganje",
+      capacityTurningText: "Kapacitet struga – Ø 250 × 500 mm",
+      capacityFlatTitle: "Ravno brušenje",
+      capacityFlatText: "Kapacitet – 100 × 500 mm",
+      capacityRoundTitle: "Obimno brušenje",
+      capacityRoundText: "Kapacitet – Ø 200 × 500 mm",
+      capacityErosionTitle: "Elektroeroziona obrada",
+      capacityErosionText: "Elektroerozija žicom i elektrodom",
+      capacityHeatTitle: "Termička obrada",
+      capacityHeatText: "Kaljenje i nitriranje",
+      capacitySurfaceTitle: "Površinska obrada",
+      capacitySurfaceText: "Bruniranje i hromiranje",
+      capacityLaserTitle: "Lasersko sečenje",
+      capacityLaserText: "Sečenje materijala laserom prema zahtjevu",
+      capacityNote: "Za ponudu je dovoljno poslati crtež, materijal, količinu i željeni rok izrade.",
       turningTitle: "CNC struganje",
       turningText: "CNC struganje omogućava izradu mašinskih delova sa rotacionim površinama prema zadatim dimenzijama i tehničkim zahtevima. Obrada se planira na osnovu dostavljenog crteža, količine i namene gotovog dela. Za svaki upit razmatramo konkretne zahteve kako bismo utvrdili mogućnosti i uslove izrade.",
       millingTitle: "CNC glodanje",
@@ -1060,6 +1189,26 @@ U saradnji sa klijentima nastojimo da razumemo svaki zahtev, sagledamo tehničku
       servicesEyebrow: "What we do",
       servicesTitle: "Our services",
       servicesIntro: "We provide metal machining services, focusing on CNC technologies and the production of parts based on technical documentation.",
+      capacityEyebrow: "Our capabilities",
+      capacityTitle: "Machining capabilities and additional services",
+      capacityIntro: "An overview of our machining capabilities and available dimensions.",
+      capacityMillingTitle: "Milling",
+      capacityMillingText: "Largest milling machine – travels 1000 × 600 mm",
+      capacityTurningTitle: "Turning",
+      capacityTurningText: "Lathe capacity – Ø 250 × 500 mm",
+      capacityFlatTitle: "Surface grinding",
+      capacityFlatText: "Capacity – 100 × 500 mm",
+      capacityRoundTitle: "Cylindrical grinding",
+      capacityRoundText: "Capacity – Ø 200 × 500 mm",
+      capacityErosionTitle: "Electrical discharge machining",
+      capacityErosionText: "Wire EDM and die-sinking EDM",
+      capacityHeatTitle: "Heat treatment",
+      capacityHeatText: "Hardening and nitriding",
+      capacitySurfaceTitle: "Surface finishing",
+      capacitySurfaceText: "Bluing and chrome plating",
+      capacityLaserTitle: "Laser cutting",
+      capacityLaserText: "Laser cutting according to project requirements",
+      capacityNote: "For a quotation, send us the drawing, material, quantity and desired delivery time.",
       turningTitle: "CNC turning",
       turningText: "CNC turning is used to manufacture machined components with rotational surfaces according to specified dimensions and technical requirements. Each job is considered based on the supplied drawing, quantity and intended use of the finished part. We review the specific requirements of every enquiry to establish the possible scope and terms of production.",
       millingTitle: "CNC milling",
@@ -1148,6 +1297,26 @@ U saradnji sa klijentima nastojimo da razumemo svaki zahtev, sagledamo tehničku
       servicesEyebrow: "Was wir tun",
       servicesTitle: "Unsere Leistungen",
       servicesIntro: "Wir bieten Dienstleistungen in der Metallbearbeitung mit Schwerpunkt auf CNC-Technologien und der Fertigung von Teilen nach technischer Dokumentation.",
+      capacityEyebrow: "Unsere Kapazitäten",
+      capacityTitle: "Bearbeitungskapazitäten und zusätzliche Leistungen",
+      capacityIntro: "Übersicht unserer Bearbeitungsmöglichkeiten und verfügbaren Abmessungen.",
+      capacityMillingTitle: "Fräsen",
+      capacityMillingText: "Größte Fräsmaschine – Verfahrwege 1000 × 600 mm",
+      capacityTurningTitle: "Drehen",
+      capacityTurningText: "Drehkapazität – Ø 250 × 500 mm",
+      capacityFlatTitle: "Flachschleifen",
+      capacityFlatText: "Kapazität – 100 × 500 mm",
+      capacityRoundTitle: "Rundschleifen",
+      capacityRoundText: "Kapazität – Ø 200 × 500 mm",
+      capacityErosionTitle: "Funkenerosion",
+      capacityErosionText: "Drahterodieren und Senkerodieren",
+      capacityHeatTitle: "Wärmebehandlung",
+      capacityHeatText: "Härten und Nitrieren",
+      capacitySurfaceTitle: "Oberflächenbehandlung",
+      capacitySurfaceText: "Brünieren und Verchromen",
+      capacityLaserTitle: "Laserschneiden",
+      capacityLaserText: "Laserschneiden nach Projektanforderungen",
+      capacityNote: "Für ein Angebot senden Sie uns bitte Zeichnung, Material, Stückzahl und gewünschten Liefertermin.",
       turningTitle: "CNC-Drehen",
       turningText: "Beim CNC-Drehen werden rotationssymmetrische Werkstücke entsprechend den vorgegebenen Abmessungen und technischen Anforderungen gefertigt. Die Bearbeitung wird anhand der bereitgestellten Zeichnung, der Stückzahl und des Verwendungszwecks des fertigen Teils geplant. Jede Anfrage wird einzeln geprüft, um den möglichen Fertigungsumfang und die Bedingungen festzulegen.",
       millingTitle: "CNC-Fräsen",

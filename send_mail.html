@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="bs">
 <head>
@@ -363,7 +364,6 @@ tr:hover td { background: #f8fafc; }
         <button type="button" class="secondary" id="refreshHistory">Osvježi historiju</button>
     </div>
 
-    <!-- FILTERI -->
     <div class="filters">
         <div class="filter-group">
             <label for="historyFilter">Filtriraj po email adresi:</label>
@@ -374,28 +374,23 @@ tr:hover td { background: #f8fafc; }
             </select>
         </div>
 
-      
-<div class="filter-group">
-    <label for="statusFilter">Status poruke:</label>
-    <select id="statusFilter">
-        <option value="ALL">Sve poruke</option>
-        <option value="POSLANO">POSLANO</option>
-        <option value="OTVOREN">OTVOREN</option>
-        <option value="KLIKNUT">KLIKNUT</option>
-        <option value="DOGOVORENO">DOGOVORENO</option>
-        <option value="ISPORUCENO">ISPORUCENO</option>
-        <option value="ODBIJENO">ODBIJENO</option>
-    </select>
-</div>
-
+        <div class="filter-group">
+            <label for="directionFilter">Vrsta email komunikacije:</label>
+            <select id="directionFilter">
+                <option value="ALL">Sve poruke</option>
+                <option value="OUT" selected>Odlazne poruke</option>
+                <option value="IN">Dolazne poruke</option>
+            </select>
+        </div>
 
         <div class="filter-group">
             <label for="statusFilter">Status poruke:</label>
             <select id="statusFilter">
                 <option value="ALL">Svi statusi</option>
                 <option value="POSLANO">POSLANO</option>
-                <option value="OTVORFEN">OTVORFEN</option>
-                <option value="KLIKNUTO">KLIKNUTO</option>
+                <option value="OTVOREN">OTVOREN</option>
+                <option value="KLIKNUT">KLIKNUT</option>
+                <option value="DOGOVORENO">DOGOVORENO</option>
                 <option value="ISPORUCENO">ISPORUCENO</option>
                 <option value="ODBIJENO">ODBIJENO</option>
             </select>
@@ -512,10 +507,9 @@ function addHtmlExpandableCell(row, value) {
     const cell = document.createElement("td");
     const content = document.createElement("div");
     content.className = "expandable-text";
-    
+
     const textVal = (value === null || value === undefined || value === "") ? "—" : String(value);
-    
-    // Ako tekst izgleda kao HTML, ubaci ga preko innerHTML, inače textContent
+
     if (textVal.includes("<") && textVal.includes(">")) {
         content.innerHTML = textVal;
     } else {
@@ -682,8 +676,7 @@ async function loadHistory() {
             addCell(row, mail.EMAIL_PRIMAOCA);
             addCell(row, mail.EMAIL_POSILJAOCA);
             addCell(row, mail.NASLOV);
-            
-            // Sadržaj kao HTML/tekst
+
             addHtmlExpandableCell(row, mail.SADRZAJ);
 
             addCell(row, mail.TIP);
@@ -696,8 +689,7 @@ async function loadHistory() {
             row.appendChild(statusCell);
 
             addCell(row, formatDate(mail.CREATED_AT));
-            
-            // Detalji (JSON) kao tekst ili proširivo
+
             addHtmlExpandableCell(row, mail.DETALJI);
 
             addCell(row, mail.ODGOVOR_NA_ID);

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="bs">
 <head>
@@ -388,9 +387,8 @@ tr:hover td { background: #f8fafc; }
             <select id="statusFilter">
                 <option value="ALL">Svi statusi</option>
                 <option value="POSLANO">POSLANO</option>
-                <option value="OTVOREN">OTVOREN</option>
-                <option value="KLIKNUT">KLIKNUT</option>
-                <option value="DOGOVORENO">DOGOVORENO</option>
+                <option value="OTVORENO">OTVORENO</option>
+                <option value="KLIKNUTO">KLIKNUTO</option>
                 <option value="ISPORUCENO">ISPORUCENO</option>
                 <option value="ODBIJENO">ODBIJENO</option>
             </select>
@@ -502,7 +500,6 @@ function addCell(row, value) {
     return cell;
 }
 
-// Funkcija za prikaz HTML sadržaja (renderuje HTML tagove umjesto običnog teksta)
 function addHtmlExpandableCell(row, value) {
     const cell = document.createElement("td");
     const content = document.createElement("div");
@@ -646,11 +643,11 @@ async function loadHistory() {
             });
         }
 
-        // 3. FILTER PO STATUSU
+        // 3. FILTER PO STATUSU (Neosjetljiv na velika/mala slova)
         if (statusFilter !== "ALL") {
             filteredData = filteredData.filter(mail => {
-                const currentStatus = String(mail.STATUS || "").toUpperCase();
-                return currentStatus === statusFilter.toUpperCase();
+                const currentStatus = String(mail.STATUS || "").trim().toLowerCase();
+                return currentStatus === statusFilter.trim().toLowerCase();
             });
         }
 
